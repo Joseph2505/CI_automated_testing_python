@@ -1,15 +1,12 @@
-FROM python:3.9
+# Dockerfile to build a flask app
+FROM python:3.10
 
-WORKDIR /app
+WORKDIR /usr/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt . 
 
-COPY . /app
+RUN pip install -r requirements.txt
 
-EXPOSE 5000
+COPY app.py .
 
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-
-CMD ["flask", "run"]
+CMD ["python", "app.py"]
